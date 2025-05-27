@@ -9,7 +9,7 @@ public class Cadastro {
     private JComboBox<String> tipoCombo;
     private JButton confirmarBtn, excluirBtn, limparBtn;
 
-    private JRadioButton fornecedorSim, fornecedorNao;
+    private JRadioButton fornecedor;
     private ButtonGroup grupoFornecedor;
 
     public Cadastro() {
@@ -18,10 +18,10 @@ public class Cadastro {
         panel.setPreferredSize(new Dimension(600, 500));
         Font fonteLabel = new Font("Arial", Font.PLAIN, 12);
 
-        JLabel titulo = new JLabel("Cadastro de Pessoa");
-        
-        titulo.setForeground(new Color(204, 51, 0));
-        titulo.setBounds(180, 10, 300, 30);
+        JLabel titulo = new JLabel("Cadastro");
+        titulo.setFont(new Font("Arial", Font.BOLD, 30));
+        titulo.setForeground(new Color(246, 120, 40));
+        titulo.setBounds(180, 10, 500, 30);
         panel.add(titulo);
 
         int y = 50;
@@ -45,20 +45,14 @@ public class Cadastro {
         panel.add(campoSenha[1]);
 
         adicionarLabel("Fornecedor:", 310, y, panel, fonteLabel);
-        fornecedorSim = new JRadioButton("Sim");
-        fornecedorNao = new JRadioButton("Não");
-        fornecedorSim.setBounds(400, y, 60, 25);
-        fornecedorNao.setBounds(470, y, 60, 25);
+        fornecedor = new JRadioButton();
+        fornecedor.setBounds(400, y, 20, 25);
+        
 
         grupoFornecedor = new ButtonGroup();
-        grupoFornecedor.add(fornecedorSim);
-        grupoFornecedor.add(fornecedorNao);
+        grupoFornecedor.add(fornecedor);
 
-        fornecedorNao.setSelected(true);
-
-        panel.add(fornecedorSim);
-        panel.add(fornecedorNao);
-
+        panel.add(fornecedor);
         
         y += 35;
         adicionarLabel("Email:", 30, y, panel, fonteLabel);
@@ -201,7 +195,6 @@ public class Cadastro {
         rbAtivo.setSelected(false);
         rbInativo.setSelected(false);
         grupoFornecedor.clearSelection();
-        fornecedorNao.setSelected(true);
     }
 
     public JPanel getPanel() {
