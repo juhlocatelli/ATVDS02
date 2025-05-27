@@ -1,6 +1,8 @@
+//Bibliotecas
 import javax.swing.*;
 import java.awt.*;
 
+//Declaração dos componentes/elementos da tela
 public class Cadastro {
     private JPanel panel;
     private JTextField[] campoTexto = new JTextField[13];  
@@ -10,48 +12,42 @@ public class Cadastro {
     private JButton confirmarBtn, excluirBtn, limparBtn;
 
     private JRadioButton fornecedor;
-    private ButtonGroup grupoFornecedor;
 
-    public Cadastro() {
-        panel = new JPanel();
-        panel.setLayout(null);
-        panel.setPreferredSize(new Dimension(600, 500));
-        Font fonteLabel = new Font("Arial", Font.PLAIN, 12);
+    public Cadastro() {//Construtor
+        panel = new JPanel();//Criação de objeto
+        panel.setLayout(null);//Ajuste de layout manual
+        panel.setPreferredSize(new Dimension(600, 500));//encarrega-se do tamanho do paiunel
+        Font fonteLabel = new Font("Arial", Font.PLAIN, 12);//escolha da fonte utilizada
 
-        JLabel titulo = new JLabel("Cadastro");
-        titulo.setFont(new Font("Arial", Font.BOLD, 30));
+        JLabel titulo = new JLabel("Cadastro");// Objeto cadastro
+        titulo.setFont(new Font("Arial", Font.BOLD, 30));//Fonte
         titulo.setForeground(new Color(246, 120, 40));
-        titulo.setBounds(180, 10, 500, 30);
-        panel.add(titulo);
+        titulo.setBounds(180, 10, 500, 30);//posicionamento
+        panel.add(titulo);// Adiciona ao painel/tela que será exibida
 
-        int y = 50;
-
-        
-        adicionarLabel("Tipo:", 30, y, panel, fonteLabel);
-        tipoCombo = new JComboBox<>(new String[]{"Física", "Jurídica"});
-        tipoCombo.setBounds(100, y, 150, 25);
-        panel.add(tipoCombo);
-
-        adicionarLabel("CPF/CNPJ:", 310, y, panel, fonteLabel);
-        campoSenha[0] = new JPasswordField();
-        campoSenha[0].setBounds(400, y, 150, 25);
-        panel.add(campoSenha[0]);
+        int y = 50;// variável usada para indicar a posição y dos itens na tela
 
         
-        y += 35;
-        adicionarLabel("RG/Inscrição:", 30, y, panel, fonteLabel);
-        campoSenha[1] = new JPasswordField();
-        campoSenha[1].setBounds(130, y, 120, 25);
-        panel.add(campoSenha[1]);
+        adicionarLabel("Tipo:", 30, y, panel, fonteLabel);// metodo que chama a label tipo
+        tipoCombo = new JComboBox<>(new String[]{"Física", "Jurídica"});// opção de escolha 
+        tipoCombo.setBounds(100, y, 150, 25);//posicionamento
+        panel.add(tipoCombo);//adiciona a tela
 
-        adicionarLabel("Fornecedor:", 310, y, panel, fonteLabel);
-        fornecedor = new JRadioButton();
-        fornecedor.setBounds(400, y, 20, 25);
+        adicionarLabel("CPF/CNPJ:", 310, y, panel, fonteLabel);//metodo que chama a label cpf/cnpj
+        campoSenha[0] = new JPasswordField();// Objeto passwordfield
+        campoSenha[0].setBounds(400, y, 150, 25);// posicionamento do campo de senha
+        panel.add(campoSenha[0]);// adicionando ao painel
+
         
+        y += 35;//atualização no valor de y
+        adicionarLabel("RG/Inscrição:", 30, y, panel, fonteLabel);//metodo que chama a leabel
+        campoSenha[1] = new JPasswordField();//mais um campo de senha
+        campoSenha[1].setBounds(130, y, 120, 25);// posicionamento
+        panel.add(campoSenha[1]);// acrescenta a tela
 
-        grupoFornecedor = new ButtonGroup();
-        grupoFornecedor.add(fornecedor);
-
+        adicionarLabel("Fornecedor:", 310, y, panel, fonteLabel);// metodo que chama a label
+        fornecedor = new JRadioButton();// botao radio sem texto
+        fornecedor.setBounds(400, y, 20, 25);// posicionamento
         panel.add(fornecedor);
         
         y += 35;
@@ -138,6 +134,7 @@ public class Cadastro {
         excluirBtn = new JButton("Excluir");
         limparBtn = new JButton("Limpar");
 
+        //Estilização dos botoes e dos textos contidos neles
         Color laranja = new Color(255, 102, 0);
         confirmarBtn.setBackground(laranja);
         excluirBtn.setBackground(laranja);
@@ -151,17 +148,18 @@ public class Cadastro {
         excluirBtn.setBounds(240, y + 40, 100, 30);
         limparBtn.setBounds(350, y + 40, 100, 30);
 
+        //Adição deles ao painel
         panel.add(confirmarBtn);
         panel.add(excluirBtn);
         panel.add(limparBtn);
 
-        
+        //Eventos
         confirmarBtn.addActionListener(e -> confirmar());
         excluirBtn.addActionListener(e -> excluir());
         limparBtn.addActionListener(e -> limpar());
     }
 
-    private void adicionarLabel(String texto, int x, int y, JPanel p, Font fonte) {
+    private void adicionarLabel(String texto, int x, int y, JPanel p, Font fonte) {// cuida da aparencia das labels
         JLabel label = new JLabel(texto);
         label.setFont(fonte);
         label.setBounds(x, y, 100, 25);
@@ -172,29 +170,29 @@ public class Cadastro {
         String cpfCnpj = new String(campoSenha[0].getPassword());
         String rg = new String(campoSenha[1].getPassword());
 
-        if (cpfCnpj.isEmpty() || campoTexto[0].getText().isEmpty()) { 
-            JOptionPane.showMessageDialog(panel, "Preencha os campos obrigatórios.");
+        if (cpfCnpj.isEmpty() || campoTexto[0].getText().isEmpty()) {//validaçaõ de campos
+            JOptionPane.showMessageDialog(panel, "Preencha os campos obrigatórios.");//Mensagem de campos obrigatórios caso não estejam preenchidos
         } else {
-            JOptionPane.showMessageDialog(panel, "Cadastro confirmado.");
+            JOptionPane.showMessageDialog(panel, "Cadastro confirmado.");// mensagem de sucesso se o cadastro for realizado
         }
     }
 
     private void excluir() {
-        limpar();
-        JOptionPane.showMessageDialog(panel, "Dados excluídos.");
+        limpar();// limpa os elementos da tela
+        JOptionPane.showMessageDialog(panel, "Dados excluídos.");// exibe mensagem que os dados foram excluidos
     }
 
-    private void limpar() {
-        for (JTextField campo : campoTexto) {
-            if (campo != null) campo.setText("");
+    private void limpar() {// Limpa todos os campos
+        for (JTextField campo : campoTexto) {// percorre todos os campos de texto
+            if (campo != null) campo.setText("");// verificação de preenchimento ou não, e apaga eles
         }
-        for (JPasswordField campoSenha : campoSenha) {
-            if (campoSenha != null) campoSenha.setText("");
+        for (JPasswordField campoSenha : campoSenha) {// percorre os campos colocados como senha
+            if (campoSenha != null) campoSenha.setText("");// verificação de preenchimento ou não, e apaga eles
         }
         tipoCombo.setSelectedIndex(0);
-        rbAtivo.setSelected(false);
-        rbInativo.setSelected(false);
-        grupoFornecedor.clearSelection();
+        rbAtivo.setSelected(false);// desmarca o botão de opção ativo
+        rbInativo.setSelected(false);// desmarca o botao de opção inativo
+        Fornecedor.clearSelection();//limpa a escolha em fornecedor
     }
 
     public JPanel getPanel() {
