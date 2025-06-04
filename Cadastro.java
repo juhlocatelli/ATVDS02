@@ -192,7 +192,7 @@ public class Cadastro {
         tipoCombo.setSelectedIndex(0);
         rbAtivo.setSelected(false);// desmarca o botão de opção ativo
         rbInativo.setSelected(false);// desmarca o botao de opção inativo
-        Fornecedor.clearSelection();//limpa a escolha em fornecedor
+        fornecedor.setSelected(false);//limpa a escolha em fornecedor
     }
 
     public JPanel getPanel() {
